@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "resultSetBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "%TILES_CONTAINER%/{layertype}/{timestamp}/part-{partCount}",
+      "connection": "AZURE_STORAGE_CONNECTION_STRING"
+    }
+  ],
+  "disabled": false
+}

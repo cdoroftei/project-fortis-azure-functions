@@ -1,0 +1,19 @@
+{
+  "bindings": [
+        {
+          "type": "timerTrigger",
+          "name": "runInterval",
+          "schedule": "0 0 * * * *",//Run once at the top of every hour
+          "direction": "in"
+        },
+        {
+          "type": "table",
+          "name": "fbPageTable",
+          "tableName": "fortisFacebookPages",
+          "connection": "AZURE_STORAGE_CONNECTION_STRING",
+          "direction": "in",
+          "partitionKey": "%FORTIS_SITE_NAME%"
+        }
+  ],
+  "disabled": false
+}

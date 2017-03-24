@@ -1,0 +1,34 @@
+{
+    "success": true,
+    "count": 1,
+    "data": [
+        {
+            "data_id": "233042",
+            "gwno": "530",
+            "event_id_cnty": "12253RTA",
+            "event_id_no_cnty": "",
+            "event_date": "2016-10-03",
+            "year": "2016",
+            "time_precision": "1",
+            "event_type": "Violence against civilians",
+            "actor1": "Military Forces of Ethiopia (1991-)",
+            "ally_actor_1": "",
+            "inter1": "1",
+            "actor2": "Protesters (Ethiopia)",
+            "ally_actor_2": "Oromo Ethnic Group (Ethiopia)",
+            "inter2": "6",
+            "interaction": "16",
+            "country": "Ethiopia",
+            "admin1": "Oromia",
+            "admin2": "Misraq Harerge",
+            "admin3": "Haro Maya",
+            "location": "Aweday",
+            "latitude": "9.35773",
+            "longitude": "42.0458",
+            "geo_precision": "1",
+            "source": "Oromia Media Network",
+            "notes": "Demonstrations erupted in Aweday in reaction to violence during Iresha festivities in Bishoftu the day before. Soldiers allegedly fired on the protesters.",
+            "fatalities": "0"
+        }
+    ]
+}

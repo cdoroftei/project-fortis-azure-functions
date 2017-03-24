@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "resultSetBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "%PROCESSED_MESSAGES_CONTAINER%/{timestamp}/part-{partCount}",
+      "connection": "AZURE_STORAGE_CONNECTION_STRING"
+    }
+  ],
+  "disabled": false
+}

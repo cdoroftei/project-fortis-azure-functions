@@ -1,0 +1,19 @@
+{
+  "bindings": [
+       {
+            "type": "eventHubTrigger",
+            "name": "tadaEventHubMessage",
+            "path": "facts-eventhub",
+            "connection": "FACTS_EVENTHUB_CONNECTION_STRING",
+            "direction": "in"
+       },
+       {
+            "name": "preNlpQueueItem",
+            "queueName": "prenlpinput",
+            "connection": "AZURE_STORAGE_CONNECTION_STRING",
+            "type": "queue",
+            "direction": "out"
+       }
+ ],
+  "disabled": false
+}

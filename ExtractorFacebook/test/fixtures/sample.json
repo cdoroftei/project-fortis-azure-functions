@@ -1,0 +1,44 @@
+[
+    {
+        "ArabicName": "عاجل ليبيا",
+        "EnglishName": "",
+        "pageUrl": "agellibya",
+        "PartitionKey": "Facebook",
+        "RowKey": "06f3578f-277f-44e3-a41a-bc6a026d2df8"
+    },
+    {
+        "ArabicName": "ليبيا ميديا",
+        "EnglishName": "Libya Media",
+        "pageUrl": "Libya.Media.Page",
+        "PartitionKey": "Facebook",
+        "RowKey": "0723de07-b955-4f1a-a730-eefa20ce526e"
+    },
+    {
+        "ArabicName": "فجر ليبيا",
+        "EnglishName": "",
+        "pageUrl": "libya172200136",
+        "PartitionKey": "Facebook",
+        "RowKey": "0747f5b7-9b4f-4315-a094-e93587944452"
+    },
+    {
+        "ArabicName": "بعثة الاتحاد الاوروبي في ليبيا",
+        "EnglishName": "Delegation of the European Union to Libya",
+        "pageUrl": "EUinLibya",
+        "PartitionKey": "Facebook",
+        "RowKey": "0b3fa507-d58c-4bab-9abf-9cc75317d008"
+    },
+    {
+        "ArabicName": "قناة ليبيا الدولية",
+        "EnglishName": "Libya International Channel",
+        "pageUrl": "Libya.Lic1",
+        "PartitionKey": "Facebook",
+        "RowKey": "0b648573-3005-4ea0-8027-adabf22c11eb"
+    },
+    {
+        "ArabicName": "ليبيا",
+        "EnglishName": "Libya",
+        "pageUrl": "libya.newsfeed",
+        "PartitionKey": "Facebook",
+        "RowKey": "0df84e63-c4a7-4ce3-af6c-56bc1a418b4f"
+    }
+]

@@ -1,0 +1,126 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "hostingPlanName": { "type": "string" },
+    "webSiteName": { "type": "string" },
+    "dataStorageAccountName": { "type": "string" },
+    "uniqueId": { "type": "string" },
+    "reactAppSiteHost": { "type": "string" },
+    "siteName": { "type": "string" },
+    "eventHubConnectionStringKeywords": { "type": "string" },
+    "eventHubNameKeywords": { "type": "string" },
+    "eventHubConnectionStringFacts": { "type": "string" },
+    "eventHubNameFacts": { "type": "string" },
+    "geoTwitStorageAccountName": { "type": "string" },
+    "clusterStorageAccountName": { "type": "string" },
+    "hdiControllerName": { "type": "string" },
+    "hdiClusterName": { "type": "string" },
+    "preNlpQueueName": { "type": "string" },
+    "messagesContainer": { "type": "string", "defaultValue": "fortis-messages" },
+    "processedMessagesContainer": { "type": "string", "defaultValue": "processed-messages" },
+    "tilesContainer": { "type": "string", "defaultValue": "processed-tiles" },
+    "tilesIncrementalContainer": { "type": "string", "defaultValue": "processed-tiles-prev" },
+    "timeSeriesContainer": { "type": "string", "defaultValue": "processed-timeseries-bysource" }
+  },
+  "variables": {
+    "applicationInsightName": "[concat('FortisFunctionsAppInsight-', parameters('uniqueId'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-08-01",
+      "name": "[parameters('webSiteName')]",
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]": "Resource",
+        "displayName": "FunctionsWebSite"
+      },
+       "properties": {
+        "name": "[parameters('webSiteName')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+      },
+      "resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "name": "web",
+          "type": "config",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', parameters('webSiteName'))]"
+          ],
+          "properties": {
+            "phpVersion": "5.5",
+            "netFrameworkVersion": "v4.6",
+            "use32BitWorkerProcess": false, /* 64-bit platform */
+            "webSocketsEnabled": true,
+            "alwaysOn": true,
+            "requestTracingEnabled": true, /* Failed request tracing, aka 'freb' */
+            "httpLoggingEnabled": true, /* IIS logs (aka Web server logging) */
+            "logsDirectorySizeLimit": 40, /* 40 MB limit for IIS logs */
+            "detailedErrorLoggingEnabled": true, /* Detailed error messages  */
+            "remoteDebuggingEnabled": false,
+            "remoteDebuggingVersion": "VS2015",
+            "scmType": "LocalGit"
+          }
+        },
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', parameters('webSiteName'))]",
+          ],
+          "tags": {
+            "displayName": "ApplicationSettings"
+          },
+          "properties": {
+            "WEBSITE_NODE_DEFAULT_VERSION": "6.5.0",
+            "FUNCTIONS_EXTENSION_VERSION": "~1",
+            "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('dataStorageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('dataStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]",
+            "AzureWebJobsDashboard": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('dataStorageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('dataStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]",
+            "PCT_GEOTWIT_AZURE_STORAGE_ACCOUNT": "[parameters('geoTwitStorageAccountName')]",
+            "PCT_GEOTWIT_AZURE_STORAGE_KEY": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('geoTwitStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]",
+            "STORAGE_ACCOUNT": "[parameters('dataStorageAccountName')]",
+            "STORAGE_KEY": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('dataStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]",
+            "KEYWORD_EVENTHUB_CONNECTION_STRING": "[parameters('eventHubConnectionStringKeywords')]",
+            "KEYWORD_EVENTHUB_NAME": "[parameters('eventHubNameKeywords')]",
+            "FACTS_EVENTHUB_CONNECTION_STRING": "[parameters('eventHubConnectionStringFacts')]",
+            "FACTS_EVENTHUB_NAME": "[parameters('eventHubNameFacts')]",
+            "SCM_COMMAND_IDLE_TIMEOUT": "7200",
+            "PRE_NLP_TABLE ": "fortisMessagesPrenlp",
+            "PRE_NLP_QUEUE": "[parameters('preNlpQueueName')]",
+            "REACT_APP_SERVICE_HOST": "[parameters('reactAppSiteHost')]",
+            "FORTIS_SITE_NAME": "[parameters('siteName')]",
+            "AZURE_STORAGE_CONNECTION_STRING": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('dataStorageAccountName'), ';AccountKey=', listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('dataStorageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value)]",
+            "APP_NAME": "[parameters('hdiControllerName')]",
+            "CLUSTER_NAME": "[parameters('hdiClusterName')]",
+            "CLUSTER_STORAGE_ACCOUNT_NAME": "[parameters('clusterStorageAccountName')]",
+            "MESSAGES_CONTAINER": "[parameters('messagesContainer')]",
+            "TILES_PREV_CONTAINER": "[parameters('tilesIncrementalContainer')]",
+            "TILES_CONTAINER": "[parameters('tilesContainer')]",
+            "PROCESSED_MESSAGES_CONTAINER": "[parameters('processedMessagesContainer')]",
+            "TIMESERIES_CONTAINER": "[parameters('timeSeriesContainer')]",
+            "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', variables('applicationInsightName')), '2014-04-01').InstrumentationKey]"
+          }
+        }
+      ]
+    },
+    {
+      "name": "[variables('applicationInsightName')]",
+      "type": "Microsoft.Insights/components",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2014-04-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('webSiteName'))]"
+      ],
+      "tags": {
+        "displayName": "Component ApplicationInsight"
+      },
+      "properties": {
+        "applicationId": "[resourceId('Microsoft.Web/sites', parameters('webSiteName'))]"
+      }
+    }
+  ],
+  "outputs": {}
+}

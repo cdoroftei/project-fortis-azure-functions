@@ -1,0 +1,26 @@
+{
+  "name": "tadaextractor",
+  "version": "1.0.0",
+  "engines": {
+    "node": "4.4.x"
+  },
+  "description": "Tadaweb data extractor",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@turf/turf": "^3.7.0",
+    "applicationinsights": "^0.16.0",
+    "async": "^2.1.2",
+    "moment": "^2.15.1",
+    "node-cache": "^4.1.0",
+    "proxyquire": "^1.7.10",
+    "request": "^2.79.0",
+    "sinon": "^1.17.6"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
+}
