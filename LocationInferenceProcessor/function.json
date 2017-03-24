@@ -1,0 +1,19 @@
+﻿{
+    "disabled": false,
+    "bindings": [
+        {
+            "name": "inputQueueItem",
+            "type": "queueTrigger",
+            "direction": "in",
+            "queueName": "locationinferenceinput",
+            "connection":"AZURE_STORAGE_CONNECTION_STRING"
+       },
+       {
+            "type": "eventHub",
+            "name": "outputEventHubMessage",
+            "path": "keywords-eventhub",
+            "connection": "KEYWORD_EVENTHUB_CONNECTION_STRING",
+            "direction": "out"
+       }
+    ]
+}

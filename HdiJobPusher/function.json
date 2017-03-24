@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "type": "timerTrigger",
+      "name": "runInterval",
+      "schedule": "0 0 1 * * *", //Run once at 01:00 every day
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

@@ -1,0 +1,27 @@
+{
+  "name": "acledextractor",
+  "version": "1.0.0",
+  "engines": {
+    "node": "4.4.x"
+  },
+  "description": "ACLED data extractor",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@turf/turf": "^3.6.1",
+    "applicationinsights": "^0.16.0",
+    "async": "^2.1.2",
+    "azure-storage": "^1.3.1",
+    "moment": "^2.15.1",
+    "node-cache": "^4.1.0",
+    "proxyquire": "^1.7.10",
+    "request": "^2.79.0",
+    "sinon": "^1.17.6"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
+}
